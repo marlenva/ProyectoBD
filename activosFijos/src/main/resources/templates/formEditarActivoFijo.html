@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/activos.css">
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            body {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .content {
+                flex: 1;
+            }
+
+            footer {
+                background-color: #0a4275;
+                text-align: center;
+                color: white;
+                position: relative;
+                bottom: 0;
+
+            }
+        </style>
+        <title>Editar Activo Fijo</title>
+    </head>
+    <body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-light" style="background-color: #0a4275;">
+            <!-- Enlace de la marca con el logotipo -->
+            <a class="navbar-brand" style="color:white " th:href="@{/lista}">
+                <img src="img/activosFijos.png" width="30" height="30" alt="Logo">
+                Sistema Gestor de Activos Fijos 
+            </a>
+
+        </nav>
+        <!-- Contenido principal -->
+        <div class="content">
+            <div class="container mt-5 vj-destacados">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Encabezado de la página -->
+                        <h1 style="color:green">Editar Activo Fijo</h1>
+                        <!-- Formulario para editar un activo fijo -->
+                        <form method="POST" th:action="@{/activosfijos/guardarCambios}" th:object="${activo}">
+                            <div class="form-group">
+                                <label for="url">URL</label>
+                                <input type="text" class="form-control" th:field="*{url}" id="url" >
+                            </div>
+                            <div class="form-group">
+                                <label for="cuaf">CUAF</label>
+                                <input type="text" class="form-control" th:field="*{cuaf}" id="cuaf" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion">Descripción del Activo Fijo</label>
+                                <input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" >
+                            </div>            
+                            <div class="form-group">
+                                <label for="condicion">Condición</label>
+                                <input type="text" class="form-control" th:field="*{condicion}" id="condicion" >
+                            </div>
+                            <div class="form-group">
+                                <label for="unidad">Unidad Académica</label>
+                                <select class="form-control" th:field="*{unidad}" id="unidad">
+                                    <option th:each="unidadAcademica: ${unidades}" 
+                                            th:value="${unidadAcademica.idUnidad}" th:text="${unidadAcademica.nombre}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ubicacion">Ubicación</label>
+                                <select class="form-control" th:field="*{ubicacion}" id="ubicacion">
+                                    <option th:each="ubicacion: ${ubicaciones}" 
+                                            th:value="${ubicacion.idUbicacion}" th:text="${ubicacion.edificio + ' - ' + ubicacion.salon}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoria">Categoría</label>
+                                <select class="form-control" th:field="*{categoria}" id="categoria">
+                                    <option th:each="categoria: ${categorias}" 
+                                            th:value="${categoria.idCategoria}" th:text="${categoria.descripcionCat}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="numSerie">Número de serie</label>
+                                <input type="text" class="form-control" th:field="*{numSerie}" id="numSerie" >
+                            </div>
+                            <div class="form-group d-flex flex-row">
+                                <label for="fechaAlta">Fecha de Alta:   </label>
+                                <input type="date" th:value="*{fechaAlta}" id="fechaAlta" name="fechaAlta" required><br>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="observaciones">Observaciones</label>
+                                <textarea class="form-control" th:field="*{observaciones}" id="observaciones" rows="3"></textarea>
+                            </div>
+                            <!-- Botón para guardar los cambios -->
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            <!-- Botón para cancelar la edición -->
+                            <a th:href="@{/lista}" class="btn btn-outline-success">Cancelar</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <!-- Pie de página -->
+        <footer class="text-center text-white" style="background-color: #0a4275;">
+            <div class="text-center p-3">
+                Marlen Valadez Avelar 6° ITC
+            </div>
+        </footer>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

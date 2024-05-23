@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/activos.css">
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            body {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .content {
+                flex: 1;
+            }
+
+            footer {
+                background-color: #0a4275;
+                text-align: center;
+                color: white;
+                position: relative;
+                bottom: 0;
+
+            }
+        </style>
+        <title>Datos del Activo Fijo</title>
+    </head>
+    <body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-light" style="background-color: #0a4275;">
+            <!-- Enlace de la marca con el logotipo -->
+            <a class="navbar-brand" style="color:white " th:href="@{/lista}">
+                <img src="img/activosFijos.png" width="30" height="30" alt="Logo">
+                Sistema Gestor de Activos Fijos 
+            </a>
+            <!-- Formulario de búsqueda -->
+            <form th:action="@{/buscar}" class="form-inline my-2 my-lg-0">
+                <input autofocus="autofocus" name="q" class="form-control mr-sm-2" type="search" th:placeholder="${param.q}" aria-label="Search">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </form>
+        </nav>
+        <!-- Contenido principal -->
+        <div class="content">
+            <div class="container mt-5 vj-destacados">
+                <div class="row">
+                    <div class="col col-md-12 text-right mb-4">
+                        <!-- Botón para regresar a la página principal -->
+                        <a th:href="@{/lista}" class="btn btn-outline-success">Regresar</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12">
+                        <!-- Encabezado de la página -->
+                        <div class="page-header" style="border-bottom:1px solid #ccc;">
+                            <h1 style="color:green">Datos del Activo Fijo</h1>
+                        </div>
+                    </div>               
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <!-- Imagen del activo -->
+                        <img th:src="${activo.url}" class="img-fluid" alt="Imagen del activo" width="640" height="853">
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Información del activo -->
+                        <h2 th:text="${activo.descripcion}"></h2>
+                        <p th:text="'Condición del activo fijo: '+ ${activo.condicion}"></p>
+                        <p>
+                            <span> Unidad académica: <span th:text="${activo.unidad.nombre}" class="badge badge-pill badge-warning-custom"></span></span>
+                        </p>
+                        <p>
+                            <span> Ubicación: <span th:text="${activo.ubicacion.edificio+ ' - ' + activo.ubicacion.salon}" class="badge badge-pill badge-warning-custom"></span></span>
+                        </p>
+                        <p>
+                            <span> Categoría: <span th:text="${activo.categoria.descripcionCat}" class="badge badge-pill badge-warning-custom"></span></span>
+                        </p>
+                        <p th:text="'Número de Serie: '+ ${activo.numSerie}"></p>
+                        <p th:text="'Fecha de alta: ' + ${activo.fechaAlta}"></p>
+                        <p th:text="'Observaciones: ' + ${activo.observaciones}"></p>
+
+                        <!-- Botones de acción -->
+                        <div class="btn-group" role="group" aria-label="Botones de Acción">
+                            <a th:href="@{/activosfijos/editar(id=${activo.cuaf})}"
+                               class="btn btn-primary" style="margin-right: 5px;">Editar</a>
+                            <a th:href="@{/activosfijos/eliminar(id=${activo.cuaf})}"
+                               class="btn btn-danger" onclick="return confirm('¿Estas seguro?')">Eliminar</a>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+        <!-- Pie de página -->
+        <footer class="text-center text-white" style="background-color: #0a4275;">
+            <div class="text-center p-3">
+                Marlen Valadez Avelar 6° ITC
+            </div>
+        </footer>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

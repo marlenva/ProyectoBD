@@ -1,0 +1,15 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:classappend": {},
+        "th:text": {},
+        "th:if": {},
+        "th:src": {},
+        "th:action": {},
+        "th:each": {},
+        "th:href": {},
+        "th:placeholder": {},
+        "th:field": {},
+        "th:value": {}
+    }
+}
