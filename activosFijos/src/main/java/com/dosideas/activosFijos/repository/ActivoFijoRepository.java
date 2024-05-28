@@ -43,8 +43,7 @@ public interface ActivoFijoRepository extends JpaRepository<ActivoFijo, Integer>
     List<ActivoFijo> buscarPorUnidad(int unidadId);
 
     /**
-     * Retorna la lista de activos fijos ordenados por nombre dependiendo de la
-     * categoria seleccionada
+     * •	Retorna la lista de activos fijos ordenados por nombre dependiendo del nombre de la categoría
      *
      * @return
      */
@@ -52,8 +51,7 @@ public interface ActivoFijoRepository extends JpaRepository<ActivoFijo, Integer>
     List<ActivoFijo> buscarPorNomCategoria(@Param("consulta") String consulta);
 
     /**
-     * Retorna la lista de activos fijos ordenados por nombre dependiendo de la
-     * unidad academica seleccionada
+     * •	Retorna la lista de activos fijos ordenados por nombre dependiendo del nombre de la unidad académica 
      *
      * @return
      */
@@ -61,8 +59,7 @@ public interface ActivoFijoRepository extends JpaRepository<ActivoFijo, Integer>
     List<ActivoFijo> buscarPorNomUnidad(@Param("consulta") String consulta);
 
     /**
-     * Retorna la lista de activos fijos ordenados por nombre dependiendo de la
-     * unidad academica seleccionada
+     * •	Retorna la lista de activos fijos ordenados por nombre dependiendo del edificio en el que se encuentra
      *
      * @return
      */

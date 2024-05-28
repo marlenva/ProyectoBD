@@ -7,7 +7,9 @@ package com.dosideas.activosFijos.repository;
 import com.dosideas.activosFijos.domain.Categoria;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -38,4 +40,13 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
      */
     @Query("SELECT c FROM Categoria c JOIN c.activosFijos a GROUP BY c HAVING COUNT(a) > 3")
     List<Categoria> findCategoriasConMasDeTresActivos();
+    
+    /**
+     * Manda a llamar al procedimiento almacenado para editar categoria 
+     *
+     * 
+     */
+     @Modifying
+    @Query(value = "CALL EditarCategoria(:categoriaId, :nuevaDescripcion)", nativeQuery = true)
+    void editarCategoria(@Param("categoriaId") int categoriaId, @Param("nuevaDescripcion") String nuevaDescripcion);
 }
