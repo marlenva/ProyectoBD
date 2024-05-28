@@ -9,9 +9,14 @@ import com.dosideas.activosFijos.repository.ActivoFijoRepository;
 import com.dosideas.activosFijos.service.CategoriaService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -111,9 +116,9 @@ public class CategoriaController {
      * @param categoria
      * @return
      */
-    @PostMapping("/categorias/guardarCambios")
-    public String guardarCambios(Categoria categoria) {
-        categoriaService.guardarCambios(categoria);
+     @PostMapping("/categorias/guardarCambios")
+    public String guardarCambios(@ModelAttribute("categoria") Categoria categoria) {
+        categoriaService.editarCategoria(categoria.getIdCategoria(), categoria.getDescripcionCat());
         return "redirect:/categorias";
     }
 
@@ -142,5 +147,13 @@ public class CategoriaController {
         List<Categoria> categoria = categoriaService.buscarCategoriasConMasDeTresActivos();
         model.addAttribute("categoria", categoria);
         return "categorias.html";
+    }
+    
+    @PutMapping("/categorias/{categoriaId}")
+    public ResponseEntity<Void> editarCategoria(
+            @PathVariable int categoriaId, 
+            @RequestBody String nuevaDescripcion) {
+        categoriaService.editarCategoria(categoriaId, nuevaDescripcion);
+        return ResponseEntity.ok().build();
     }
 }

@@ -6,6 +6,7 @@ package com.dosideas.activosFijos.service;
 
 import com.dosideas.activosFijos.domain.Categoria;
 import com.dosideas.activosFijos.repository.CategoriaRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -94,10 +95,20 @@ public class CategoriaService {
     /**
      * Retorna una lista de categorias con mas de tres activos 
      *
-     * 
      * @return
      */
     public List<Categoria> buscarCategoriasConMasDeTresActivos() {
         return categoriaRepository.findCategoriasConMasDeTresActivos();
+    }
+    
+    /**
+     * Manda a llamar al procedimiento almacenado  
+     *@param categoriaId
+     * @param nuevaDescripcion
+     *
+     */
+     @Transactional
+    public void editarCategoria(int categoriaId, String nuevaDescripcion) {
+        categoriaRepository.editarCategoria(categoriaId, nuevaDescripcion);
     }
 }
